@@ -1,0 +1,28 @@
+name: Daily Digest
+
+on:
+  # 05:00 UTC ≈ 07:00 Berlin in summer (06:00 UTC ≈ 07:00 in winter).
+  # GitHub cron is always UTC and has no timezone — adjust if you like.
+  # Note: scheduled runs can be delayed a few minutes under load, and GitHub
+  # pauses the schedule after 60 days with no commits to the repo.
+  schedule:
+    - cron: "0 5 * * 1-5"   # Mon–Fri
+  workflow_dispatch:          # adds a "Run workflow" button for manual testing
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - run: python run_cloud.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}

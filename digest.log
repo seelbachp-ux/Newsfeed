@@ -1,0 +1,12 @@
+Building your digest...
+
+  → researching: 🤖 Latest in AI ...
+  → researching: 🐙 GitHub & open source ...
+Traceback (most recent call last):
+  File "/Users/philippseelbach/ai-digest/digest.py", line 131, in <module>
+    main()
+  File "/Users/philippseelbach/ai-digest/digest.py", line 121, in main
+    md_path = write_markdown(today, text)
+  File "/Users/philippseelbach/ai-digest/digest.py", line 73, in write_markdown
+    with open(path, "w") as f:
+PermissionError: [Errno 1] Operation not permitted: '/Users/philippseelbach/Library/Mobile Documents/com~apple~CloudDocs/AI Digest/digest-2026-06-25.md'
