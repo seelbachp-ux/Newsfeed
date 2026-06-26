@@ -10,7 +10,7 @@ researches (here) without touching *how* it runs (there).
 # Sonnet is far cheaper than Opus ($3/$15 vs $5/$25 per 1M tokens) and plenty
 # smart for summarizing news. For rock-bottom cost use "claude-haiku-4-5"
 # ($1/$5); switch back to "claude-opus-4-8" if you ever want maximum quality.
-MODEL = "claude-sonnet-4-6"
+MODEL = "claude-haiku-4-5"
 
 # ── Cost controls ────────────────────────────────────────────────────────
 # Cap how many web searches Claude may run per beat (each costs ~$0.01).
