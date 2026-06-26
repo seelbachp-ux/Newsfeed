@@ -17,7 +17,7 @@ def main():
     # Research first. If THIS fails, you'd otherwise get total silence — so we
     # ping Telegram with the error, then re-raise so the run still shows red.
     try:
-        today, text = build_digest()   # does the research + prints the cost
+        today, text, cost = build_digest()   # research + prints cost; cost = footer line
     except Exception as e:
         try:
             send_telegram(f"⚠️ Digest run FAILED during research:\n{type(e).__name__}: {e}")
@@ -25,7 +25,9 @@ def main():
             pass
         raise
 
-    send_telegram(text)
+    # Cost footer goes to Telegram only (not into `text`, so the podcast audio
+    # doesn't read it aloud).
+    send_telegram(text + "\n\n" + cost)
     print(f"\n📨 Sent the {today} digest to Telegram.")
 
     # Podcast step — only runs when FEED_BASE_URL is set (i.e. in the cloud,

@@ -93,19 +93,27 @@ def run_beat(client, beat, system):
 
 
 # ── Step 2: stitch the sections into one digest ──────────────────────────
-def print_cost(t):
-    """Estimate and print what this run cost, from the tallied usage."""
+def _estimate_cost(t):
     price = config.PRICING.get(config.MODEL, {"in": 0, "out": 0})
-    cost = (
+    return (
         t["in"] / 1_000_000 * price["in"]
         + t["out"] / 1_000_000 * price["out"]
         + t["searches"] * config.WEB_SEARCH_COST
     )
-    print(f"\n💸 Estimated cost this run: ${cost:.3f}")
+
+
+def print_cost(t):
+    """Estimate and print what this run cost (to the log)."""
+    print(f"\n💸 Estimated cost this run: ${_estimate_cost(t):.3f}")
     print(
         f"   ({t['in']:,} input + {t['out']:,} output tokens, "
         f"{t['searches']} web searches, model {config.MODEL})"
     )
+
+
+def cost_footer(t):
+    """One-line cost summary to append to the Telegram message."""
+    return f"— 💸 ${_estimate_cost(t):.3f} · {config.MODEL} · {t['searches']} searches"
 
 
 def build_digest():
@@ -124,7 +132,7 @@ def build_digest():
         parts.append(f"## {beat['title']}\n\n{section}\n")
 
     print_cost(grand)
-    return today, "\n".join(parts)
+    return today, "\n".join(parts), cost_footer(grand)
 
 
 # ── Step 3a: save the Markdown to the local folder ───────────────────────
@@ -178,7 +186,7 @@ def main():
         )
 
     print("Building your digest...\n")
-    today, text = build_digest()
+    today, text, _ = build_digest()
 
     md_path = write_markdown(today, text)
     print(f"\n✅ Markdown saved (local): {md_path}")
