@@ -14,7 +14,9 @@ MODEL = "claude-sonnet-4-6"
 
 # ── Cost controls ────────────────────────────────────────────────────────
 # Cap how many web searches Claude may run per beat (each costs ~$0.01).
-MAX_SEARCHES_PER_BEAT = 4
+# Keep this high enough that Claude can finish researching; too low and it
+# runs out mid-research and writes a weak section.
+MAX_SEARCHES_PER_BEAT = 6
 # Effort controls how much Claude thinks / how many tools it uses.
 # "low" is cheapest and fine for summaries; "medium"/"high" cost more.
 EFFORT = "low"
@@ -74,6 +76,10 @@ Rules for every item you report:
 - Rank by genuine significance, newest/most important first.
 - Be concise. No hype, no filler, no "in today's fast-moving world" intros.
 - If you genuinely find nothing noteworthy for a section, say so in one line.
+- You have a LIMITED number of web searches. Use them efficiently, then write
+  the digest from whatever you gathered. NEVER apologize, and NEVER mention
+  search limits, rate limits, "max uses exceeded", or any tool errors in your
+  output — the reader only wants the briefing, written from what you found.
 Write in clean Markdown. Do not add a top-level title — the script adds that.
 """
 

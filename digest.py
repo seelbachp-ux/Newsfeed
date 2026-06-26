@@ -44,7 +44,10 @@ def run_beat(client, beat):
             thinking={"type": "adaptive"},
             output_config={"effort": config.EFFORT},  # "low" = cheaper
             tools=[{
-                "type": "web_search_20260209",
+                # Standard web search (no code-execution sandbox) — reliable.
+                # The newer "..._20260209" variant adds code-based result
+                # filtering that can fail mid-run with a container_id error.
+                "type": "web_search_20250305",
                 "name": "web_search",
                 "max_uses": config.MAX_SEARCHES_PER_BEAT,  # cap search cost
             }],
