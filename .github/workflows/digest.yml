@@ -6,7 +6,10 @@ on:
   # Note: scheduled runs can be delayed a few minutes under load, and GitHub
   # pauses the schedule after 60 days with no commits to the repo.
   schedule:
-    - cron: "0 5 * * 1-5"   # Mon–Fri
+    # Mon, Wed, Fri only (1=Mon, 3=Wed, 5=Fri) to save cost. Each run covers
+    # everything since the previous one (Mon sweeps the weekend; Wed picks up
+    # Tue; Fri picks up Thu) — see coverage_sentence() in digest.py.
+    - cron: "0 5 * * 1,3,5"
   workflow_dispatch:          # adds a "Run workflow" button for manual testing
 
 # Needed so the job can commit the new episode + feed back to the repo.

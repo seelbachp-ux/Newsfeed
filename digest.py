@@ -15,7 +15,7 @@ import re
 import shutil
 import subprocess
 import sys
-from datetime import date
+from datetime import date, timedelta
 
 import anthropic
 from dotenv import load_dotenv
@@ -26,7 +26,26 @@ load_dotenv()  # reads ANTHROPIC_API_KEY from a .env file if present
 
 
 # ── Step 1: ask Claude to research one beat ──────────────────────────────
-def run_beat(client, beat):
+def coverage_sentence(today=None):
+    """Describe the date range this run should cover.
+
+    Schedule is Mon/Wed/Fri, and each run covers everything since the previous
+    run, so nothing is missed despite skipping Tue/Thu:
+      Monday    → back to Friday  (sweeps the weekend)
+      Wednesday → back to Monday  (picks up Tuesday)
+      Friday    → back to Wednesday (picks up Thursday)
+    """
+    today = today or date.today()
+    days_back = {0: 3, 2: 2, 4: 2}.get(today.weekday(), 2)  # Mon=0..Sun=6
+    since = today - timedelta(days=days_back)
+    return (
+        f"COVERAGE WINDOW: only include items published from "
+        f"{since:%A %B %d} through {today:%A %B %d} — i.e. everything new since "
+        f"the previous brief. Ignore anything older; it was already covered."
+    )
+
+
+def run_beat(client, beat, system):
     """Run a single research beat. Returns (section_text, usage_totals)."""
     print(f"  → researching: {beat['title']} ...", flush=True)
 
@@ -40,7 +59,7 @@ def run_beat(client, beat):
         response = client.messages.create(
             model=config.MODEL,
             max_tokens=8000,
-            system=config.SYSTEM_PROMPT,
+            system=system,
             thinking={"type": "adaptive"},
             output_config={"effort": config.EFFORT},  # "low" = cheaper
             tools=[{
@@ -93,10 +112,13 @@ def build_digest():
     client = anthropic.Anthropic()  # picks up ANTHROPIC_API_KEY from the env
     today = date.today().isoformat()
 
+    # Build the system prompt once, with the date range this run should cover.
+    system = config.SYSTEM_PROMPT + "\n\n" + coverage_sentence()
+
     grand = {"in": 0, "out": 0, "searches": 0}
     parts = [f"# Daily Digest — {today}\n"]
     for beat in config.BEATS:
-        section, totals = run_beat(client, beat)
+        section, totals = run_beat(client, beat, system)
         for k in grand:
             grand[k] += totals[k]
         parts.append(f"## {beat['title']}\n\n{section}\n")
