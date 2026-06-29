@@ -152,7 +152,7 @@ def build_digest():
     system = config.SYSTEM_PROMPT + "\n\n" + coverage_sentence()
 
     grand = {"in": 0, "out": 0, "searches": 0}
-    parts = [f"# Daily Digest — {today}\n"]
+    sections = []
     for beat in config.BEATS:
         prompt = beat["prompt"]
 
@@ -172,10 +172,18 @@ def build_digest():
         section, totals = run_beat(client, beat, system, prompt)
         for k in grand:
             grand[k] += totals[k]
-        parts.append(f"## {beat['title']}\n\n{section}\n")
+        sections.append({"key": beat["key"], "title": beat["title"], "text": section})
 
     print_cost(grand)
-    return today, "\n".join(parts), cost_footer(grand)
+    return today, sections, cost_footer(grand)
+
+
+def render_markdown(today, sections):
+    """Join per-topic sections into one Markdown document (for the local file)."""
+    parts = [f"# Daily Digest — {today}\n"]
+    for s in sections:
+        parts.append(f"## {s['title']}\n\n{s['text']}\n")
+    return "\n".join(parts)
 
 
 # ── Step 3a: save the Markdown to the local folder ───────────────────────
@@ -229,7 +237,8 @@ def main():
         )
 
     print("Building your digest...\n")
-    today, text, _ = build_digest()
+    today, sections, _ = build_digest()
+    text = render_markdown(today, sections)
 
     md_path = write_markdown(today, text)
     print(f"\n✅ Markdown saved (local): {md_path}")

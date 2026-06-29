@@ -17,7 +17,7 @@ def main():
     # Research first. If THIS fails, you'd otherwise get total silence — so we
     # ping Telegram with the error, then re-raise so the run still shows red.
     try:
-        today, text, cost = build_digest()   # research + prints cost; cost = footer line
+        today, sections, cost = build_digest()   # research + prints cost
     except Exception as e:
         try:
             send_telegram(f"⚠️ Digest run FAILED during research:\n{type(e).__name__}: {e}")
@@ -25,21 +25,26 @@ def main():
             pass
         raise
 
-    # Cost footer goes to Telegram only (not into `text`, so the podcast audio
-    # doesn't read it aloud).
-    send_telegram(text + "\n\n" + cost)
-    print(f"\n📨 Sent the {today} digest to Telegram.")
+    # One Telegram message per topic. Cost footer goes on the last message only
+    # (and not into the section text, so the podcast audio doesn't read it).
+    for i, s in enumerate(sections):
+        body = f"{s['title']}\n\n{s['text']}"
+        if i == len(sections) - 1:
+            body += "\n\n" + cost
+        send_telegram(body)
+    print(f"\n📨 Sent {len(sections)} topic messages to Telegram.")
 
-    # Podcast step — only runs when FEED_BASE_URL is set (i.e. in the cloud,
-    # where Piper + ffmpeg are installed). Skipped on a plain local run.
-    # Wrapped so a TTS/feed hiccup can't undo the Telegram delivery above.
+    # Podcast: one episode per topic. Only runs when FEED_BASE_URL is set (the
+    # cloud, where Piper + ffmpeg exist). Wrapped so a TTS/feed hiccup can't
+    # undo the Telegram delivery above.
     if os.environ.get("FEED_BASE_URL"):
         try:
             import speak
             import build_feed
-            speak.make_mp3(text, f"docs/episodes/{today}.mp3")
+            for s in sections:
+                speak.make_mp3(s["text"], f"docs/episodes/{today}-{s['key']}.mp3")
             build_feed.build()
-            print("🎧 Podcast episode + feed updated.")
+            print(f"🎧 {len(sections)} podcast episodes + feed updated.")
         except Exception:
             print("⚠️ Podcast step failed (Telegram already sent):")
             traceback.print_exc()
