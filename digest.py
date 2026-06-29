@@ -60,8 +60,9 @@ def run_beat(client, beat, system):
             model=config.MODEL,
             max_tokens=8000,
             system=system,
-            thinking={"type": "adaptive"},
-            output_config={"effort": config.EFFORT},  # "low" = cheaper
+            # NOTE: Haiku 4.5 does not support `thinking` or `output_config`
+            # (effort). If you switch MODEL back to Sonnet/Opus, you can re-add
+            # thinking={"type": "adaptive"} for a quality bump.
             tools=[{
                 # Standard web search (no code-execution sandbox) — reliable.
                 # The newer "..._20260209" variant adds code-based result
