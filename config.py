@@ -57,7 +57,9 @@ PROFILE = """
 The reader is an indie developer currently rebuilding a workout-tracking app
 as a native iOS app in SwiftUI (migrating away from a PWA/VPS setup). They
 care about: Swift / SwiftUI, native iOS, AI agents and agent tooling, and
-solo/indie-developer workflows. Skip anything not relevant to those interests.
+solo/indie-developer workflows. Use this as light background on the reader's
+tastes — but always follow each section's OWN task for what to include (some
+sections cover unrelated topics like markets).
 """
 
 # ── System prompt: the agent's standing instructions ─────────────────────
@@ -106,6 +108,26 @@ BEATS = [
             "to my coding journey (Swift/SwiftUI, native iOS, AI agent "
             "tooling, indie-dev workflows). Give me the top 5 with a one-line "
             "note on why each is worth a look."
+        ),
+    },
+    {
+        "key": "reddit",
+        "title": "📈 Reddit ticker radar",
+        # `context` pulls live mention data first (see CONTEXT_PROVIDERS in
+        # digest.py) and prepends it to this prompt.
+        "context": "reddit_radar",
+        "prompt": (
+            "Above is live data on which stock tickers are spiking in mentions "
+            "on Reddit (source: ApeWisdom). Pick the 4–5 most NOTABLE — favour "
+            "big jumps in mentions vs 24h ago, not just the most popular. For "
+            "each: ticker + company, the mention numbers (now vs 24h ago), then "
+            "search the web for WHY it's getting attention right now (the "
+            "narrative people are discussing) and the overall sentiment "
+            "(bullish / bearish / mixed).\n"
+            "This is an ATTENTION RADAR ONLY — describe what's being talked "
+            "about. Do NOT give buy/sell advice, price targets, or "
+            "recommendations. End the section with exactly this line:\n"
+            "_Attention radar only — not financial advice. Do your own research._"
         ),
     },
 ]

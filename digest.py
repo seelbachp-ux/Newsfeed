@@ -10,11 +10,14 @@ The whole thing is the classic agent loop you learned about:
 Run it with:   python digest.py
 """
 
+import html
+import json
 import os
 import re
 import shutil
 import subprocess
 import sys
+import urllib.request
 from datetime import date, timedelta
 
 import anthropic
@@ -45,11 +48,35 @@ def coverage_sentence(today=None):
     )
 
 
-def run_beat(client, beat, system):
+# ── Optional data providers a beat can pull before researching ───────────
+def fetch_reddit_radar(top=12):
+    """Live Reddit stock-mention data from ApeWisdom (free, no auth)."""
+    url = "https://apewisdom.io/api/v1.0/filter/all-stocks/page/1"
+    req = urllib.request.Request(url, headers={"User-Agent": "ai-digest/1.0"})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        data = json.load(r)
+
+    lines = ["ticker | company | mentions now (24h ago) | rank now (24h ago)"]
+    for x in data.get("results", [])[:top]:
+        lines.append(
+            f"{x['ticker']} | {html.unescape(x['name'])} | "
+            f"{x['mentions']} ({x.get('mentions_24h_ago', '?')}) | "
+            f"#{x['rank']} (#{x.get('rank_24h_ago', '?')})"
+        )
+    return "LIVE REDDIT MENTION DATA (source: ApeWisdom):\n" + "\n".join(lines)
+
+
+# Maps a beat's "context" key → a function returning text to prepend to its prompt.
+CONTEXT_PROVIDERS = {
+    "reddit_radar": fetch_reddit_radar,
+}
+
+
+def run_beat(client, beat, system, prompt):
     """Run a single research beat. Returns (section_text, usage_totals)."""
     print(f"  → researching: {beat['title']} ...", flush=True)
 
-    messages = [{"role": "user", "content": beat["prompt"]}]
+    messages = [{"role": "user", "content": prompt}]
     totals = {"in": 0, "out": 0, "searches": 0}
 
     # Server-side web search: Claude runs the search/read loop on Anthropic's
@@ -127,7 +154,22 @@ def build_digest():
     grand = {"in": 0, "out": 0, "searches": 0}
     parts = [f"# Daily Digest — {today}\n"]
     for beat in config.BEATS:
-        section, totals = run_beat(client, beat, system)
+        prompt = beat["prompt"]
+
+        # If the beat declares a data provider, fetch it and prepend. A failure
+        # here must not sink the whole digest — fall back to web search.
+        provider = CONTEXT_PROVIDERS.get(beat.get("context"))
+        if provider:
+            try:
+                prompt = provider() + "\n\n" + prompt
+            except Exception as e:
+                print(f"  ! data provider for {beat['key']} failed: {e}", flush=True)
+                prompt = (
+                    "(Live data was unavailable — instead, search the web for "
+                    "currently trending Reddit stock tickers.)\n\n" + prompt
+                )
+
+        section, totals = run_beat(client, beat, system, prompt)
         for k in grand:
             grand[k] += totals[k]
         parts.append(f"## {beat['title']}\n\n{section}\n")
