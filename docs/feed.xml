@@ -8,6 +8,24 @@
     <itunes:author>AI Digest Agent</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <item>
+      <title>📈 Reddit ticker radar — 2026-07-06</title>
+      <enclosure url="https://seelbachp-ux.github.io/Newsfeed/episodes/2026-07-06-reddit.mp3" length="2083779" type="audio/mpeg"/>
+      <guid isPermaLink="false">2026-07-06-reddit.mp3</guid>
+      <pubDate>Mon, 06 Jul 2026 00:00:00 -0000</pubDate>
+    </item>
+    <item>
+      <title>🐙 GitHub &amp; open source — 2026-07-06</title>
+      <enclosure url="https://seelbachp-ux.github.io/Newsfeed/episodes/2026-07-06-github.mp3" length="958006" type="audio/mpeg"/>
+      <guid isPermaLink="false">2026-07-06-github.mp3</guid>
+      <pubDate>Mon, 06 Jul 2026 00:00:00 -0000</pubDate>
+    </item>
+    <item>
+      <title>🤖 Latest in AI — 2026-07-06</title>
+      <enclosure url="https://seelbachp-ux.github.io/Newsfeed/episodes/2026-07-06-ai.mp3" length="1406267" type="audio/mpeg"/>
+      <guid isPermaLink="false">2026-07-06-ai.mp3</guid>
+      <pubDate>Mon, 06 Jul 2026 00:00:00 -0000</pubDate>
+    </item>
+    <item>
       <title>📈 Reddit ticker radar — 2026-07-03</title>
       <enclosure url="https://seelbachp-ux.github.io/Newsfeed/episodes/2026-07-03-reddit.mp3" length="1945435" type="audio/mpeg"/>
       <guid isPermaLink="false">2026-07-03-reddit.mp3</guid>
