@@ -2,7 +2,7 @@ name: Daily Digest
 
 # Research now happens in a scheduled Claude routine (see ROUTINE.md). It
 # pushes digests/<date>/*.md, and that push triggers this delivery job:
-# Telegram + Piper podcast episode + RSS feed. No API key needed here anymore.
+# Telegram + Kokoro podcast episode + RSS feed. No API key needed here anymore.
 on:
   push:
     paths: ["digests/**"]       # any branch — the routine may push to claude/*
@@ -38,24 +38,19 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Install audio tools (ffmpeg + Piper TTS)
+      - name: Install audio tools (ffmpeg + espeak-ng + Kokoro TTS)
         run: |
-          sudo apt-get update && sudo apt-get install -y ffmpeg
-          pip install piper-tts
-
-      - name: Download Piper voice model
-        run: |
-          mkdir -p voice
-          base=https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/lessac/medium
-          curl -sL -o voice/en_US-lessac-medium.onnx       "$base/en_US-lessac-medium.onnx"
-          curl -sL -o voice/en_US-lessac-medium.onnx.json  "$base/en_US-lessac-medium.onnx.json"
+          sudo apt-get update && sudo apt-get install -y ffmpeg espeak-ng
+          # CPU-only torch: the default Linux wheel drags in GBs of CUDA.
+          pip install kokoro soundfile --extra-index-url https://download.pytorch.org/whl/cpu
 
       - name: Send Telegram, render podcast
         run: python run_cloud.py
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          PIPER_MODEL: voice/en_US-lessac-medium.onnx
+          ESPEAK_LIB: /usr/lib/x86_64-linux-gnu/libespeak-ng.so.1
+          ESPEAK_DATA: /usr/lib/x86_64-linux-gnu/espeak-ng-data
           FEED_BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
           WATCHDOG: ${{ github.event_name == 'schedule' }}
 

@@ -13,7 +13,7 @@ It's built on the **classic agent loop**: give the model a goal + a tool
    `config.py`, and pushes `digests/<date>/<beat>.md`. Manage it at
    https://claude.ai/code/routines. It's paid by the Claude plan, not an API key.
 2. That push triggers **GitHub Actions** (`.github/workflows/digest.yml` →
-   `run_cloud.py`), which sends Telegram, renders Piper MP3s and rebuilds the
+   `run_cloud.py`), which sends Telegram, renders Kokoro MP3s (voice: George) and rebuilds the
    podcast feed. A watchdog run at 09:17 UTC pings Telegram if no digest came.
 
 Effort for the routine is set in `.claude/settings.json`. Everything below

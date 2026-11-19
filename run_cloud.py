@@ -41,7 +41,7 @@ def deliver(day):
         send_telegram(f"{s['title']}\n\n{s['text']}")
     print(f"📨 {day}: sent {len(sections)} topic messages to Telegram.")
 
-    # Podcast only where Piper + ffmpeg exist (the workflow sets FEED_BASE_URL).
+    # Podcast only where Kokoro + ffmpeg exist (the workflow sets FEED_BASE_URL).
     if os.environ.get("FEED_BASE_URL"):
         import speak
         for s in sections:
