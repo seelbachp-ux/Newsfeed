@@ -7,9 +7,10 @@ on:
   push:
     paths: ["digests/**"]       # any branch — the routine may push to claude/*
   schedule:
-    # Watchdog, ~3h after the routine's slot (04:17 UTC). Delivers anything
+    # Watchdog, ~3h after the routine's slot (06:00 UTC). Delivers anything
     # still pending and alerts on Telegram if today's digest never arrived.
-    - cron: "17 7 * * 1,3,5"
+    # Odd minute: GitHub's free scheduler drops fewer runs off the hour.
+    - cron: "17 9 * * 1-5"
   workflow_dispatch:            # "Run workflow" button: delivers anything pending
 
 permissions:

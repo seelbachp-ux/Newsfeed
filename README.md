@@ -8,13 +8,13 @@ It's built on the **classic agent loop**: give the model a goal + a tool
 (web search), let it search/read/decide, and collect the result.
 
 ## How it runs now (hybrid, since 2026-11)
-1. A **Claude routine** (Opus 5.5, effort medium) runs Mon/Wed/Fri ~04:17 UTC in
+1. A **Claude routine** (Opus 5.5, effort medium) runs Mon–Fri 06:00 UTC (07:00 Berlin winter, 08:00 summer) in
    Anthropic's cloud. It follows `ROUTINE.md`, researches the beats from
    `config.py`, and pushes `digests/<date>/<beat>.md`. Manage it at
    https://claude.ai/code/routines. It's paid by the Claude plan, not an API key.
 2. That push triggers **GitHub Actions** (`.github/workflows/digest.yml` →
    `run_cloud.py`), which sends Telegram, renders Piper MP3s and rebuilds the
-   podcast feed. A watchdog run at 07:17 UTC pings Telegram if no digest came.
+   podcast feed. A watchdog run at 09:17 UTC pings Telegram if no digest came.
 
 Effort for the routine is set in `.claude/settings.json`. Everything below
 describes the original local version, which `digest.py` still supports.

@@ -32,14 +32,12 @@ load_dotenv()  # reads ANTHROPIC_API_KEY from a .env file if present
 def coverage_sentence(today=None):
     """Describe the date range this run should cover.
 
-    Schedule is Mon/Wed/Fri, and each run covers everything since the previous
-    run, so nothing is missed despite skipping Tue/Thu:
-      Monday    → back to Friday  (sweeps the weekend)
-      Wednesday → back to Monday  (picks up Tuesday)
-      Friday    → back to Wednesday (picks up Thursday)
+    Schedule is Mon–Fri; each run covers everything since the previous one:
+      Monday     → back to Friday (sweeps the weekend)
+      Tue–Fri    → back to yesterday
     """
     today = today or date.today()
-    days_back = {0: 3, 2: 2, 4: 2}.get(today.weekday(), 2)  # Mon=0..Sun=6
+    days_back = {0: 3, 5: 1, 6: 2}.get(today.weekday(), 1)  # Mon=0..Sun=6
     since = today - timedelta(days=days_back)
     return (
         f"COVERAGE WINDOW: only include items published from "

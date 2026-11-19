@@ -6,10 +6,10 @@ the sections and push them.
 
 ## 1. Work out the date and coverage window
 
-- Today = `date -u +%F` (runs Mon/Wed/Fri ~04:17 UTC).
+- Today = `date -u +%F` (runs Mon–Fri 06:00 UTC = 07:00 Berlin in winter).
 - The coverage window is everything since the previous brief:
-  Monday → since Friday, Wednesday → since Monday, Friday → since Wednesday.
-  Any other weekday (manual run) → the last 2 days.
+  Monday → since Friday (sweeps the weekend); Tuesday–Friday → since yesterday.
+  Weekend (manual run) → since Friday.
 
 ## 2. Read the brief
 
