@@ -1,0 +1,19 @@
+**Anthropic mathematician claims a Claude-assisted proof of the Riemann Hypothesis** — On Friday, Levent Alpöge posted a short note and a Lean-formalised proof, saying he found it "working with Claude." He says it also covers the Generalized Riemann Hypothesis. MIT's Andrew Sutherland compiled the Lean code on his own and confirmed it proves the statement as written. No proof that humans can read has been published yet, and mathematicians are still working through the details.
+*Why it matters:* if it holds up, this is the strongest evidence so far that an AI model plus a proof checker can settle a famous open problem. Treat it as unconfirmed until the checks finish.
+Source: [Scientific American](https://www.scientificamerican.com/article/anthropic-mathematician-claims-to-prove-riemann-hypothesis-most-famous-problem-in-all-of-math/)
+
+**Nvidia drops 14% after a report that the SEC is examining its accounting** — On Friday, Reuters reported that the SEC is looking into possible accounting issues at Nvidia. The stock had its seventh losing week in a row, the longest such streak since 2008, and is down about 46% over that run. The PHLX Semiconductor Index fell 10.7%, and the Nasdaq-100 closed 19.84% below its record, just short of a bear market.
+*Why it matters:* the AI hardware trade is unwinding fast, a day after Anthropic's IPO. Expect AI companies to start talking more about cost discipline than about growth at any price.
+Source: [CNBC](https://cnbc.com/2026/11/20/nvidias-7-week-losing-streak-is-longest-since-2008-financial-crisis.html)
+
+**Thinking Machines releases Inkling 2 Mini, an open-weight coding model that runs on a 32GB Mac** — The mixture-of-experts model has 26.4B total and 3.4B active parameters. It runs its middle layer blocks three times per token, and most of its weights are stored in 4-bit precision. Thinking Machines claims 79.2% on SWE-bench Verified and the top DeepSWE score among open models under 100B parameters. It admits the model is weaker at multi-turn chat. Weights are on Hugging Face, with Ollama, llama.cpp and vLLM support.
+*Why it matters:* a capable local coding model that fits on a MacBook makes offline, zero-cost agent loops practical for solo developers.
+Source: [Thinking Machines](https://thinkingmachines.ai/news/inkling-2-mini/)
+
+**Claude Computer Use reaches Team and Enterprise plans in beta** — Under Anthropic's November 20 release notes, Claude can now see the screen and operate approved desktop apps for business plans. The feature is off by default and only org owners can turn it on. Admins can set lists of allowed and blocked apps, and each user must also opt in on their own machine. Anthropic's setup guide notes there is no sandbox between Claude and the user's apps.
+*Why it matters:* agents that drive desktop apps are moving from demo to managed enterprise feature, so apps that work well with assistive and automation tools stand to gain.
+Source: [AI Weekly (citing Anthropic release notes)](https://aiweekly.co/alerts/claude-computer-use-beta-lands-on-team-and-enterprise-plans)
+
+**Together AI says stored customer prompts were stolen through a credential an AI coding agent leaked** — Prompt samples from June and July serverless requests were kept in a private Hugging Face repo. They were downloaded after a coding agent committed that repo's credential to a public GitHub project. The attacker then tested secrets found inside the prompts, five of which were canary credentials planted by Dragos researchers. Together has made zero data retention the default for new accounts.
+*Why it matters:* never put live secrets in prompts sent to inference providers, and check what your own coding agent commits.
+Source: [Together AI](https://www.together.ai/blog/security-event-prompt-leakage-for-requests-in-june-and-july-of-2026)
