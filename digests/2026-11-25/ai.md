@@ -1,0 +1,19 @@
+**Axios: staff at Anthropic and OpenAI warn that unreleased models may be too unsafe to ship** — Axios spoke to more than two dozen people, all unnamed, and reports that researchers at both labs have clashed with executives over internal models. The reporting says these models are far more capable than anything public and that their reasoning was hard to control in testing. Some staff want training paused; others think the models can be contained. None of the claims have been independently confirmed.
+*Why it matters:* this is the most detailed account so far of safety disputes inside the frontier labs. It comes the same month California sued OpenAI as a "public nuisance".
+Source: [SiliconANGLE, summarising Axios](https://siliconangle.com/2026/11/24/staff-at-anthropic-and-open-ai-sound-alarm-on-advanced-models-too-powerful-to-release)
+
+**Cognition releases SWE-2.1, its in-house coding model for Devin** — SWE-2.1 is trained with reinforcement learning on top of Moonshot's open Kimi K3. Its Terminal-Bench 4.1 score more than doubled, from 24.2 to 50.0, and FrontierCode 2.0 rose from 24.1 to 41.3. An "Ultrafast" version served by Cerebras runs at about 600 tokens/s, and a Cyber variant with looser safeguards is going to Devin Security. It is free in Devin Desktop and CLI until Dec 8. Cognition's own table still shows Claude Opus 5.5 ahead, for example 65.8 vs 50.0 on Terminal-Bench.
+*Why it matters:* it shows how far a lab can get by fine-tuning an open-weight Chinese base model, though Cognition still trails the frontier labs.
+Source: [Cognition](https://cognition.com/blog/swe-2-1)
+
+**OpenAI says GPT-6 can design proteins using only reasoning and code** — In OpenAI's wet-lab tests, 35 of 322 small binder proteins designed by the models (10.9%) bound their target, and up to 85% of redesigned sequences for known structures bound. Specialised tools such as ESMFold2 and ProteinMPNN were still used to filter candidates. Whole-protein structure prediction remains weak, with a TM-score of 0.26 against ESMFold2's 0.93, and the best results came from an internal model that has not been released. This is a preprint.
+*Why it matters:* general-purpose models are starting to match purpose-built science tools on parts of the work, which raises the stakes on biosecurity.
+Source: [OpenAI](https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities/)
+
+**Dell's revenue doubles on AI servers, while memory shortages hit the rest of AI hardware** — Dell reported fiscal Q3 revenue of $54.9B, up 103%, against about $49.3B expected. AI-server revenue was $22B, up 291%, the AI backlog stands at $132.3B, and Dell approved a $25B buyback. On the same day HPE fell 16.4% on shrinking AI-server margins and said memory will stay tight until at least late 2028. Ambarella dropped about 38% after hours on guidance it blamed on the memory shortage. The Philadelphia chip index fell 7.9%, giving back most of Monday's rally.
+*Why it matters:* demand for AI servers is not the bottleneck; memory supply and its cost are, and that cost reaches consumer devices too.
+Source: [CNBC](https://www.cnbc.com/2026/11/24/dell-earnings-report-q3-2027.html)
+
+**Baidu releases open weights for ERNIE 5.5 Flash Preview under Apache 2.0** — It is a mixture-of-experts model with 280B total and 14B active parameters, shipped in MXFP4/FP8 at about 166 GB. The Apache 2.0 license covers only this preview: the base model's license excludes the EU, UK and South Korea and requires permission above $50M in revenue. Early r/LocalLLaMA reports show fast inference on two RTX PRO 6000 cards.
+*Why it matters:* another strong Chinese open-weight model, but the regional restrictions in the base license rule it out for EU-based products.
+Source: [AI Oriens](https://ai-oriens.com/en/news/ernie-5-5-flash-preview-weights)
