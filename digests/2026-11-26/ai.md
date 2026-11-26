@@ -1,0 +1,15 @@
+**The AI sell-off returns, with a sharp intraday drop and a partial recovery** — On Wednesday the Nasdaq 100 (QQQ) fell as much as 4.4% by late morning, then closed down only 0.65%; the S&P 500 lost 0.3% and the Dow rose 0.3%. Nvidia closed down 3.9%, giving back about 40% of Monday's 31% jump on Jensen Huang's reinstatement. Micron fell 4.5%, and Anthropic closed at $82.79, just under its $83 IPO price, in its fifth day of trading. The same morning, October PCE inflation came in at 3.8% year on year (3.3% core). US markets are closed today for Thanksgiving and close early on Friday.
+*Why it matters:* the Huang relief rally has faded within two sessions, and even the newly listed AI labs are trading on market mood rather than on what they ship.
+Source: [StockTitan](https://www.stocktitan.net/articles/stock-market-today-live-november-25-2026)
+
+**S&P puts Nvidia's AA credit rating under review over governance** — S&P Global Ratings may cut Nvidia from AA to AA- within 90 days. It cites "weak executive oversight and lack of succession planning" after Huang was ousted and then reinstated, plus key-man risk. Nvidia will stay investment grade. The cost is indirect: Nvidia guarantees debt for neoclouds and is planning to guarantee 25% of a $500B AI-infrastructure financing, so a lower rating could make that whole chain more expensive.
+*Why it matters:* the boardroom fight is now feeding into the cost of financing the AI buildout.
+Source: [TechCrunch](https://techcrunch.com/2026/11/25/sp-considers-nvidia-credit-downgrade-over-governance-and-key-man-risks)
+
+**Claude artifacts can now be installed as desktop apps on Mac and Windows** — In Claude Desktop, Share → "Install as app" turns an artifact into its own app with a window and a Dock icon. Apps don't have to be packaged or signed. Each gets one of three permission levels: browser-only by default, opt-in extras such as notifications, global shortcuts and always-on-top windows, or full computer access. Apps can use connectors, add a menu bar item and update automatically, but changes trigger a fresh permission prompt and usage counts against your plan. The feature is in beta on all plans; Enterprise admins have to switch it on.
+*Why it matters:* for small personal tools, such as a dashboard for your app's metrics, you can skip building and signing a Mac app.
+Source: [MacRumors](https://www.macrumors.com/2026/11/25/claude-install-artifacts-desktop-apps/)
+
+**FCC conditionally approves SpaceX for up to 1 million orbital AI data-center satellites** — The approval came on Wednesday, the same day SpaceX's credit-default swaps hit record highs. The company's free cash flow was about −$35B over the first nine months of the year, much of it spent on AI data centres.
+*Why it matters:* building data centres in orbit is now an approved plan, though paying for it is still an open question.
+Source: [Motley Fool](https://www.fool.com/coverage/stock-market-today/2026/11/25/stock-market-today-nov-25-spacex-gets-historic-fcc-approval-for-1-million-satellites-is-this-its-next-growth-engine/)
