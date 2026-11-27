@@ -1,0 +1,15 @@
+**Nvidia pauses server shipments to Malaysia, Singapore, Thailand and Indonesia** — According to the Wall Street Journal, Nvidia has told partners including Dell and Super Micro to stop shipping servers to those four countries "for an unspecified period" while it checks whether regional customers meet US export rules. Chinese companies had been renting Nvidia chips remotely in data centres there until the Commerce Department closed that loophole earlier this month. The Institute for Progress estimates that remote capacity of this kind supplies about 24% of China's AI compute. CNBC separately reports that GPU resellers are now refusing any rental capacity to Chinese customers.
+*Why it matters:* this is another headwind for Nvidia in the same week as the Huang reinstatement and the S&P credit warning, and it cuts off a major route Chinese labs used to get frontier compute.
+Source: [TechCrunch](https://techcrunch.com/2026/11/26/nvidia-hits-pause-on-chip-shipments-to-southeast-asia/)
+
+**Amazon says attackers' AI agents found and exploited a zero-day with little human help** — Ars Technica reports that Amazon has seen an attacker's AI agents find a previously unknown vulnerability and exploit it with little human input. The coverage describes the agent framework involved as useful to both attackers and defenders. Earlier this month, Amazon's decoy servers caught agents running on the open-source ARTEX framework stealing AI API keys, but those attacks only used flaws that were already known.
+*Why it matters:* agent-driven attacks are moving from finding known weak spots to finding new ones, so anything you expose publicly, such as a VPS backend, will be probed faster and harder.
+Source: [Ars Technica](https://arstechnica.com/security/2026/11/amazon-says-hackers-ai-agents-found-and-exploited-0-day-with-little-human-input/)
+
+**Chinese labs hit by the distillation clampdown: Moonshot turns to Google and Meta, and Z.ai's GLM-5.5 slips** — Reuters reports that Z.ai is behind schedule on GLM-5.5, a flagship model of roughly 3 trillion parameters. Moonshot AI, which makes Kimi, has started distilling from Google and Meta models, meaning it trains on their outputs, after OpenAI and Anthropic cut off that kind of access to theirs.
+*Why it matters:* the cheap open-weight Chinese models that many agent tools default to may now improve more slowly.
+Source: [Unite.AI](https://www.unite.ai/moonshot-ai-begins-distilling-from-google-and-meta-models-amid-delays/)
+
+**Sber releases GigaChat 4, with two MoE models and a 1M-token context** — There are two mixture-of-experts sizes, a flagship 708B model (41B parameters active per token) and a 37B model, each with a native one-million-token context window. Both support tool calling and multi-step agent tasks, and the same model can answer in an Instant or a Reasoning mode, chosen per request.
+*Why it matters:* the 1M-context race now includes Russia's main lab, though it's of limited practical use outside that market.
+Source: [Unite.AI](https://www.unite.ai/gigachat-4-debuts-with-1m-token-context-and-two-model-sizes/)
